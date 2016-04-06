@@ -1,0 +1,38 @@
+<!-- TEST TITLE !-->
+<section layout='row' layout-padding>
+  <!-- TEST TITLE !-->
+  <div flex style='text-align:center;'>
+    <p style='font-size:15px;font-weight:bold;'>{{ tc.test.title }}</p>
+    score: {{ tc.test.score }} / {{ tc.test.questions.length }}
+  </div>
+  <!-- GO HOME BUTTON !-->
+  <md-button ng-click='tc.goHome()' class='md-primary'>home page</md-button>
+</section>
+
+<!-- SEARCH BOX !-->
+<section layout='row' layout-padding>
+  <i class='material-icons' style='margin-top:5px'>search</i>
+  <md-input-container flex md-no-float class='md-block' style='margin:0'>
+    <input ng-model='tc.search' placeholder='Search'>
+  </md-inpiut-container>
+</section>
+
+<!-- QUESTIONS !-->
+<md-content>
+  <md-list>
+    <md-list-item ng-repeat='question in tc.test.questions | filter:tc.search'>
+      <md-list>
+        {{ question.question }}
+        <i ng-if='question.score == true' style='font-size:18px;color:green;padding-left:10px;' class='material-icons'>check</i>
+        <i ng-if='question.score == false' style='font-size:18px;color:red;padding-left:10px;' class='material-icons'>close</i>
+        <md-list-item ng-repeat='option in question.options'>
+          <md-checkbox ng-model='option.selected' ng-change='tc.checkQuestion(question)'></md-checkbox>
+          <p> {{ option.statement }} </p>
+          <i ng-if='option.correct == option.selected' style='font-size:18px;color:green;' class='material-icons'>check</i>
+          <i ng-if='option.correct != option.selected ' style='font-size:18px;color:red;' class='material-icons'>close</i>
+        </md-list-item>
+      </md-list>
+      <md-divider></md-divider>
+    </md-list-item>
+  </md-list>
+</md-content>

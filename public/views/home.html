@@ -1,0 +1,43 @@
+<!-- HEADER BAR !-->
+<section layout='row' layout-wrap layout-padding>
+  <!-- SEARCH BOX !-->
+  <i class='material-icons' style='height:35px;margin-top:7px;'>search</i>
+  <md-input-container flex=30 md-no-float style='height:35px;margin:0;'>
+    <input ng-model='mc.search' placeholder='Search'>
+  </md-input-container>
+  <span flex></span>
+  <!-- USER LOGIN/SIGNUP!-->
+  <div ng-if='!mc.user'>
+    <md-input-container md-no-float style='height:35px;width:100px;margin:0;'>
+      <input ng-model='mc.username' placeholder='username'>
+    </md-input-container>
+    <md-input-container md-no-float style='height:35px;width:100px;margin:0;'>
+      <input type='password' ng-model='mc.password' placeholder='password'>
+    </md-input-container>
+    <md-button class='md-primary' style='margin:0;' ng-click='mc.login()'>login</md-button>
+    <md-button style='margin:0;' ng-click='mc.signup()'>signup</md-button>
+  </div>
+  <!-- USER MENU !-->
+  <div ng-if='mc.user'>
+    {{ mc.user.username }}
+    <md-button class='md-primary' style='margin:0;' ng-click='mc.logout()'>logout</md-button>
+  </div>
+</section>
+
+<!-- TESTS !-->
+<md-content>
+  <md-list>
+    <md-list-item ng-repeat='test in mc.allTests | filter:mc.search' ng-click='mc.gotoTest(test)'>
+      <md-list>
+        {{ test.title }}
+        <md-list-item style='min-height:8px;' ng-if='questionIndex < 2' ng-repeat='(questionIndex, question) in test.questions'>
+          {{ question.question }}
+        </md-list-item>
+        <md-list-item style='min-height:8px;' ng-if='test.questions.length > 2'>
+          and more
+        </md-list-item>
+      </md-list>
+      <md-divider></md-divider>
+    </md-list-item>
+  </md-list>
+</md-content>
