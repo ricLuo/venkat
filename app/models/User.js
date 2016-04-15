@@ -11,7 +11,7 @@ module.exports = mongoose.model('User', {
     title: String,
     questions : [{
       question : String,
-      options: [{
+      _options: [{
         statement: String,
         correct: Boolean,
         selected: Boolean

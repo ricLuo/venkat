@@ -7,7 +7,7 @@ module.exports = mongoose.model('Test', {
   title: String,
   questions : [{
     question : String,
-    options: [{
+    _options: [{
       statement: String,
       correct: Boolean
     }]

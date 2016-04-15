@@ -12,6 +12,12 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
     .when('/test/:testId', {
       templateUrl: 'views/test.html',
       controller: 'TestController as tc'
+    })
+
+    //Upload page
+    .when('/upload', {
+      templateUrl: 'views/Upload.html',
+      controller: 'UploadController'
     });
 
   $locationProvider.html5Mode(true);

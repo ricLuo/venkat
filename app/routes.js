@@ -1,6 +1,7 @@
 // get mongoose models
 var Test = require('./models/Test');
 var User = require('./models/User');
+var Upload = require('./models/Upload');
 
 module.exports = function(app) {
   // server routes ===========================================================
@@ -82,5 +83,19 @@ module.exports = function(app) {
   app.get('*', function(req, res) {
     res.sendfile('./public/views/index.html'); // load our public/index.html file
   });
+
+
+  app.post('/api/uploadText',function(req,res){
+      var upload = new Upload({
+          Title: req.body.title,
+          Content: req.body.content
+      });
+      console.log(upload.Title+'  '+upload.Content);
+      upload.save(function(err,upload){
+          if(err) throw(err);
+          res.send(req.body.title + 'has been retrieved');
+      })
+  });
+
 
 };
